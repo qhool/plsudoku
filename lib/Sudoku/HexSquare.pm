@@ -1,8 +1,8 @@
-package HexdokuSquare;
+package Sudoku::HexSquare;
 
 use Moose;
 
-extends 'SudokuSquare';
+extends 'Sudoku::Square';
 
 sub all_possibilities {
   return (0..15);

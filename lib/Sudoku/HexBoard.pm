@@ -1,12 +1,12 @@
-package HexdokuBoard;
+package Sudoku::HexBoard;
 
 use Moose;
-use HexdokuSquare;
+use Sudoku::HexSquare;
 
-extends 'SudokuBoard';
+extends 'Sudoku::Board';
 
 sub _square_class {
-  return 'HexdokuSquare';
+  return 'Sudoku::HexSquare';
 }
 
 sub _dimensions {
