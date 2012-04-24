@@ -5,8 +5,8 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Sudoku',
     VERSION_FROM      => 'lib/Sudoku/Board.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => { Moose => 2.0200 }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Sudoku/Board.pm', # retrieve abstract from module
-       AUTHOR         => 'Josh Burroughs <jb@>') : ()),
+      (ABSTRACT  => 'Extensible Sudoku Puzzle & Solver', # retrieve abstract from module
+       AUTHOR         => 'Josh Burroughs <josh@qhool.com>') : ()),
 );

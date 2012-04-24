@@ -6,7 +6,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 9;
 BEGIN { use_ok('Sudoku::Board') };
 
 #########################
@@ -14,7 +14,7 @@ BEGIN { use_ok('Sudoku::Board') };
 sub solve_puz {
   my $fname = shift;
   my $board = Sudoku::Board->new();
-  open PUZZLE, "<$fname" or die "Can't open $f: $!";
+  open PUZZLE, "<$fname" or die "Can't open $fname: $!";
   local $/ = undef;
   my $p = <PUZZLE>;
   close PUZZLE;
@@ -25,3 +25,6 @@ sub solve_puz {
 }
 
 solve_puz( 'puzzles/test1.puz' );
+solve_puz( 'puzzles/test2.puz' );
+solve_puz( 'puzzles/test3.puz' );
+solve_puz( 'puzzles/test4.puz' );
