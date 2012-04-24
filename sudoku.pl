@@ -2,51 +2,30 @@
 use warnings;
 use strict;
 
-use SudokuSquare;
 use SudokuBoard;
+use HexdokuBoard;
 
-my $board = new SudokuBoard;
+my $board;
 
-if( 0 == 1 ) {
-$board->set_puzzle( 
-" 4   1  3
-    5  79
-56   28 4
-1  27  8 
- 82   96 
- 3  18  7
-3 61   98
-47  8    
-8  5   4 ");
+if( @ARGV == 1 ) {
+  my $f = $ARGV[0];
+  open PUZZLE, "<$f" or die "Can't open $f: $!";
+  local $/ = undef;
+  my $p = <PUZZLE>;
+  close PUZZLE;
+  if( 10 < split( "\n", $p ) ) {
+    $board = HexdokuBoard->new();
+  } else {
+    $board = SudokuBoard->new();
+  }
+  $board->set_puzzle($p);
+} else {
+  print "Please give the name of the file which contains the puzzle you want to solve.\n";
+  exit(0);
 }
-
-$board->set_puzzle("9 6 13  8
- 58    9 
- 3     1 
- 6 8  92 
-  34 91  
- 49  6 3 
- 9     8 
- 1    67 
-4  96 3 1");
 
 $board->display();
 my $prev_num_un = $board->get_num_unset();
-print "$prev_num_un Unset.\n";
-my $num_un = 100;
-my $num_iter = 0;
-while( $num_un > 0 ) {
-  $num_un = $board->iterate();
-  $board->display();
-  print "$num_un Unset.\n";
-  $num_iter++;
-  if( $num_un == $prev_num_un ) {
-    print "I'm stuck after $num_iter iterations\n";
-    $board->display('OPT');
-    exit(-1);
-  }
-  $prev_num_un = $num_un;
-  #print Data::Dumper::Dumper($board->[2][3]->{POSSIBLE});
-  #sleep(1);
-};
-print "Solved in $num_iter iterations\n";
+$board->solve(1);
+my $num_un = $board->get_num_unset();
+$board->display();
