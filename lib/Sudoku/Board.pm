@@ -107,6 +107,7 @@ sub set_puzzle {
        }
     }
   }
+  return 1;
 }
 
 =head2 display()
@@ -253,7 +254,7 @@ Returns the hash ref of all squares in the puzzle.
 
 has 'squares' =>
 ( is => 'rw',
-  isa => 'HashRef[SudokuSquare]',
+  isa => 'HashRef[Sudoku::Square]',
   builder => '_build_squares',
 );
 

@@ -2,8 +2,10 @@
 use warnings;
 use strict;
 
-use SudokuBoard;
-use HexdokuBoard;
+use lib './lib';
+
+use Sudoku::Board;
+use Sudoku::HexBoard;
 
 my $board;
 
@@ -14,9 +16,9 @@ if( @ARGV == 1 ) {
   my $p = <PUZZLE>;
   close PUZZLE;
   if( 10 < split( "\n", $p ) ) {
-    $board = HexdokuBoard->new();
+    $board = Sudoku::HexBoard->new();
   } else {
-    $board = SudokuBoard->new();
+    $board = Sudoku::Board->new();
   }
   $board->set_puzzle($p);
 } else {

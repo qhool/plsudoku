@@ -4,3 +4,13 @@ MANIFEST
 README
 t/Sudoku-Board.t
 lib/Sudoku/Board.pm
+lib/Sudoku/Square.pm
+lib/Sudoku/HexBoard.pm
+lib/Sudoku/HexSquare.pm
+puzzles/hex1.puz
+puzzles/hex2.puz
+puzzles/test1.puz
+puzzles/test2.puz
+puzzles/test3.puz
+puzzles/test4.puz
+
