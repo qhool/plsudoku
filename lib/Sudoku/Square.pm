@@ -1,15 +1,21 @@
-package SudokuSquare;
+package Sudoku::Square;
+
+use 5.008000;
+use strict;
+use warnings;
 
 use Moose;
 
+our $VERSION = '0.1';
+
 =head1 NAME
 
-SudokuSquare
+Sudoku::Square
 
 =head1 SYNOPSIS
 
-  use SudokuSquare;
-  $sq = SudokuSquare->new(\@index);
+  use Sudoku::Square;
+  $sq = Sudoku::Square->new(\@index);
 
   @possible = $sq->possibilities();
   $val = $sq->value();
@@ -19,11 +25,11 @@ SudokuSquare
 
 =head1 DESCRIPTION
 
-The SudokuSquare class is meant to be used by SudokuBoard.  It keeps track of the value or possible values of the square, as well as the cosets (my name for the regions in a sudoku puzzle where each value must appear exactly once, and can perform inferences about its value based on the 
+The Sudoku::Square class is meant to be used by Sudoku::Board.  It keeps track of the value or possible values of the square, as well as the cosets (my name for the regions in a sudoku puzzle where each value must appear exactly once, and can perform inferences about its value based on the 
 
 =head1 SUBCLASSING
 
-To make a sub-class of SudokuSquare, you need to override all_possibilities(), and possibly from_str() and to_str() if the display form of values are anything besides numbers (e.g. for hexadecimal sudoku).  See HexdokuSquare.pm in this package for an example.
+To make a sub-class of Sudoku::Square, you need to override all_possibilities(), and possibly from_str() and to_str() if the display form of values are anything besides numbers (e.g. for hexadecimal sudoku).  See Sudoku::HexSquare.pm in this package for an example.
 
 =head1 CONSTRUCTOR
 
@@ -31,7 +37,7 @@ To make a sub-class of SudokuSquare, you need to override all_possibilities(), a
 
 =item new( index => $idx );
 
-Create a new SudokuSquare.  $idx should be an arrayref of coordinates for this square within the puzzle (it's an array to allow for more than 2 dimensions).
+Create a new Sudoku::Square.  $idx should be an arrayref of coordinates for this square within the puzzle (it's an array to allow for more than 2 dimensions).
 
 =back
 
@@ -69,7 +75,7 @@ Returns array ref of cosets.  Use add_coset() to modify cosets of the Square.
 
 has 'cosets' =>
 ( is => 'ro',
-  isa => 'ArrayRef[ArrayRef[SudokuSquare]]',
+  isa => 'ArrayRef[ArrayRef[Sudoku::Square]]',
   default => sub { [] }
 );
 
@@ -96,7 +102,7 @@ sub all_possibilities {
 
 =head2 from_str( STRING )
 
-Set the value for the square from $str.  Does nothing if $str consists of whitespace.  Used by SudokuBoard::set_puzzle() to construct a puzzle from a string.
+Set the value for the square from $str.  Does nothing if $str consists of whitespace.  Used by Sudoku::Board::set_puzzle() to construct a puzzle from a string.
 
 =cut
 
@@ -110,7 +116,7 @@ sub from_str {
 
 =head2 to_str()
 
-Returns a textual representation of the Square.  Used by SudokuSquare::display().
+Returns a textual representation of the Square.  Used by Sudoku::Square::display().
 
 =cut
 
@@ -261,7 +267,7 @@ sub induce {
 
 =head2 compare_to_cosets()
 
-Calls deduce() and induce().  If the value of the square is set during the call, or if the number of possible values is reduced, returns 1; otherwise returns 0.  SudokuBoard uses this return value to tell when the deterministic solver has 'settled' -- if the calls to compare_to_cosets for all squares return 0, that means nothing has changed, and the solution is stuck.
+Calls deduce() and induce().  If the value of the square is set during the call, or if the number of possible values is reduced, returns 1; otherwise returns 0.  Sudoku::Board uses this return value to tell when the deterministic solver has 'settled' -- if the calls to compare_to_cosets for all squares return 0, that means nothing has changed, and the solution is stuck.
 
 =cut
 
@@ -287,5 +293,5 @@ Improve deterministic solution with X-Wings, etc.
 =cut
 
 1;
-#end
+__END__
 

@@ -1,0 +1,6 @@
+Revision history for Perl extension Sudoku::Board.
+
+0.01  Mon Apr 23 22:59:20 2012
+	- original version; created by h2xs 1.23 with options
+		-AX -b 5.8.0 Sudoku::Board
+

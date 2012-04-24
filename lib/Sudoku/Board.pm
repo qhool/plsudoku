@@ -1,10 +1,16 @@
-package SudokuBoard;
+package Sudoku::Board;
 
-use SudokuSquare;
+use 5.008000;
+use strict;
+use warnings;
+
+use Sudoku::Square;
 use Data::Dumper;
 use Storable qw(dclone);
 use Moose;
 use Scalar::Util qw(weaken);
+
+our $VERSION = '0.1';
 
 =head1 NAME
 
@@ -12,8 +18,8 @@ SudokuBoard
 
 =head1 SYNOPSIS
 
-  use SudokuBoard;
-  $board = SudokuBoard->new();
+  use Sudoku::Board;
+  $board = Sudoku::Board->new();
 
   $board->set_puzzle($txt);
   $board->display();
@@ -28,7 +34,7 @@ SudokuBoard
 
 =item new()
 
-Creates new SudokuBoard.  Generally no arguments are given.
+Creates new Sudoku::Board.  Generally no arguments are given.
 
 =back
 
@@ -57,7 +63,7 @@ for my $i (0..3) {
 
 =head2 square(X,Y)
 
-Returns the SudokuSquare object at the given coordinates in the puzzle.
+Returns the Sudoku::Square object at the given coordinates in the puzzle.
 
 =cut
 
@@ -69,7 +75,7 @@ sub square {
 
 =head2 all_squares()
 
-Returns list of all SudokuSquare objects in the puzzle.  Useful for iterating over all squares.
+Returns list of all Sudoku::Square objects in the puzzle.  Useful for iterating over all squares.
 
 =cut
 
@@ -215,11 +221,11 @@ sub solve {
 
 =head1 SUBCLASSING
 
-To create a subclass, you should override at least _square_class() and _dimensions().  See HexdokuBoard.pm for an example.
+To create a subclass, you should override at least _square_class() and _dimensions().  See Sudoku::HexBoard.pm for an example.
 
 =head1 INTERNALS
 
-The following functions are used internally by SudokuBoard.
+The following functions are used internally by Sudoku::Board.
 
 =head2 square_class()
 
@@ -236,7 +242,7 @@ has 'square_class' =>
 );
 
 sub _square_class {
-  return 'SudokuSquare';
+  return 'Sudoku::Square';
 }
 
 =head2 squares()
@@ -379,5 +385,4 @@ sub solve_det {
 
 
 1;
-
-#end
+__END__
